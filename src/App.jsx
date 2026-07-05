@@ -2,32 +2,30 @@ import { lazy, Suspense } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
-import Education from './components/Education'
-import Skills from './components/Skills'
-import Experience from './components/Experience'
-import Projects from './components/Projects'
+import Services from './components/Services'
+import Gallery from './components/Gallery'
+import Milestones from './components/Milestones'
 import Certifications from './components/Certifications'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import './App.css'
 
-const CosmicBackground = lazy(() => import('./components/3d/CosmicBackground'))
+const Scene3D = lazy(() => import('./components/3d/Scene3D'))
 
 function App() {
   return (
     <>
       <Suspense fallback={null}>
-        <CosmicBackground />
+        <Scene3D />
       </Suspense>
       <div className="app-content">
         <Navbar />
         <main>
           <Hero />
           <About />
-          <Education />
-          <Skills />
-          <Experience />
-          <Projects />
+          <Services />
+          <Gallery />
+          <Milestones />
           <Certifications />
           <Contact />
         </main>

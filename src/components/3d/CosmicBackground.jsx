@@ -3,7 +3,7 @@ import { EffectComposer, Bloom, ChromaticAberration } from '@react-three/postpro
 import { BlendFunction } from 'postprocessing'
 import NebulaParticles from './NebulaParticles'
 import FloatingGlass from './FloatingGlass'
-import SynthwaveGrid from './SynthwaveGrid'
+import HeroShape from './HeroShape'
 
 export default function CosmicBackground() {
   return (
@@ -14,27 +14,28 @@ export default function CosmicBackground() {
       pointerEvents: 'none',
     }}>
       <Canvas
-        camera={{ position: [0, 3, 12], fov: 60, near: 0.1, far: 100 }}
+        camera={{ position: [0, 2, 10], fov: 55, near: 0.1, far: 100 }}
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
       >
-        <color attach="background" args={['#06060f']} />
-        <fog attach="fog" args={['#06060f', 15, 30]} />
-        <ambientLight intensity={0.3} />
-        <pointLight position={[10, 10, 10]} intensity={0.5} color="#8B5CF6" />
-        <pointLight position={[-10, -5, -10]} intensity={0.3} color="#06B6D4" />
-        <NebulaParticles count={6000} />
+        <color attach="background" args={['#07070e']} />
+        <fog attach="fog" args={['#07070e', 18, 35]} />
+        <ambientLight intensity={0.2} />
+        <pointLight position={[8, 8, 8]} intensity={0.6} color="#FF6B35" />
+        <pointLight position={[-8, -4, -8]} intensity={0.4} color="#06D6A0" />
+        <pointLight position={[0, 5, -3]} intensity={0.3} color="#FFD166" />
+        <HeroShape />
+        <NebulaParticles />
         <FloatingGlass />
-        <SynthwaveGrid />
         <EffectComposer>
           <Bloom
-            intensity={0.3}
-            luminanceThreshold={0.6}
-            luminanceSmoothing={0.9}
+            intensity={0.2}
+            luminanceThreshold={0.4}
+            luminanceSmoothing={0.8}
             blendFunction={BlendFunction.SCREEN}
           />
           <ChromaticAberration
-            offset={[0.002, 0.002]}
+            offset={[0.0015, 0.0015]}
             blendFunction={BlendFunction.NORMAL}
           />
         </EffectComposer>

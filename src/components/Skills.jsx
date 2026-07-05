@@ -1,109 +1,76 @@
 import { motion } from 'framer-motion'
 
-const skills = [
-  { category: 'Languages', items: ['Java', 'Python', 'C', 'JavaScript'], color: '#8B5CF6' },
-  { category: 'Web Technologies', items: ['HTML', 'CSS', 'React'], color: '#06B6D4' },
-  { category: 'Libraries & Tools', items: ['OpenCV', 'YOLO', 'Git', 'GitHub', 'Three.js'], color: '#EC4899' },
-  { category: 'Concepts', items: ['OOP', 'Data Structures', 'Algorithms', 'Computer Vision', 'AI/ML'], color: '#F59E0B' },
+const groups = [
+  { cat: 'Languages', items: ['Java', 'Python', 'C', 'JavaScript'], color: '#7C3AED' },
+  { cat: 'Web', items: ['HTML', 'CSS', 'React'], color: '#8B5CF6' },
+  { cat: 'Tools', items: ['OpenCV', 'YOLO', 'Git', 'GitHub', 'Three.js'], color: '#A78BFA' },
+  { cat: 'Concepts', items: ['OOP', 'DSA', 'Computer Vision', 'AI/ML'], color: '#C4B5FD' },
 ]
+
+const fade = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-50px' },
+  transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+}
 
 export default function Skills() {
   return (
     <section id="skills">
       <div className="section-inner">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="section-label">Expertise</div>
-          <h2 className="section-title">Technical Skills</h2>
+        <motion.div {...fade}>
+          <div className="section-label">Skills</div>
+          <h2 className="section-title">
+            Tech <span className="hl">Stack</span>
+          </h2>
+          <div className="line" />
         </motion.div>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
           gap: '20px',
-          marginTop: '48px',
+          marginTop: '28px',
         }}>
-          {skills.map((group, index) => (
-            <motion.div
-              key={group.category}
-              initial={{ opacity: 0, y: 40 }}
+          {groups.map((g) => (
+            <motion.div key={g.cat}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass"
-              style={{
-                padding: '28px',
-                borderTop: `3px solid ${group.color}`,
-              }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h3 style={{
+              <div style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.85rem',
-                color: group.color,
-                marginBottom: '20px',
+                fontSize: '0.7rem',
+                color: g.color,
+                fontWeight: 600,
                 letterSpacing: '2px',
+                textTransform: 'uppercase',
+                marginBottom: '10px',
               }}>
-                {'<'} {group.category} {'/>'}
-              </h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {group.items.map((skill) => (
-                  <div key={skill}>
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginBottom: '6px',
-                      fontSize: '0.9rem',
-                      color: 'var(--text-secondary)',
-                    }}>
-                      <span>{skill}</span>
-                    </div>
-                    <div style={{
-                      height: '4px',
-                      borderRadius: '2px',
-                      background: 'rgba(255,255,255,0.05)',
-                      overflow: 'hidden',
-                    }}>
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${70 + Math.random() * 25}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
-                        style={{
-                          height: '100%',
-                          borderRadius: '2px',
-                          background: `linear-gradient(90deg, ${group.color}, transparent)`,
-                        }}
-                      />
-                    </div>
-                  </div>
+                {g.cat}
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                {g.items.map((s) => (
+                  <span key={s} className="tag">{s}</span>
                 ))}
               </div>
             </motion.div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="glass"
+        <motion.div {...fade} transition={{ duration: 0.4, delay: 0.15 }}
           style={{
-            marginTop: '24px',
-            padding: '20px 28px',
+            marginTop: '20px',
+            padding: '14px 20px',
+            borderRadius: '8px',
+            background: 'var(--primary-dim)',
+            border: '1px solid var(--border-light)',
             textAlign: 'center',
           }}
         >
-          <span style={{
-            fontFamily: 'var(--font-mono)',
-            color: 'var(--text-muted)',
-            fontSize: '0.85rem',
-          }}>
-            {'>'} Problem Solving: <span style={{ color: 'var(--gold)' }}>35+ problems</span> on LeetCode (Easy / Medium)
+          <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
+            {'>'} LeetCode: <span style={{ color: 'var(--primary)', fontWeight: 600 }}>35+ problems</span> (Easy / Medium)
           </span>
         </motion.div>
       </div>

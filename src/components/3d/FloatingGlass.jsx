@@ -3,38 +3,36 @@ import { useFrame } from '@react-three/fiber'
 import { MeshTransmissionMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 
-function GlassShape({ position, geometry, color, speed, args }) {
+function GlassShape({ position, geometry, color, speed, args, orbitRadius, orbitSpeed, phase }) {
   const ref = useRef()
-  const initialPos = useMemo(() => position, [position])
+  const center = useMemo(() => position, [position])
 
   useFrame((state) => {
     if (!ref.current) return
-    const time = state.clock.elapsedTime * speed
-    ref.current.position.x = initialPos[0] + Math.sin(time * 0.5) * 1.5
-    ref.current.position.y = initialPos[1] + Math.sin(time * 0.7) * 1.2
-    ref.current.position.z = initialPos[2] + Math.cos(time * 0.4) * 0.5
-    ref.current.rotation.x += 0.003 * speed
-    ref.current.rotation.y += 0.005 * speed
-    ref.current.rotation.z += 0.002 * speed
+    const t = state.clock.elapsedTime * speed
+    const angle = t * orbitSpeed + (phase || 0)
+    ref.current.position.x = center[0] + Math.cos(angle) * orbitRadius
+    ref.current.position.z = center[2] + Math.sin(angle) * orbitRadius
+    ref.current.position.y = center[1] + Math.sin(t * 0.6) * 0.8
+    ref.current.rotation.x = t * 0.4
+    ref.current.rotation.y = t * 0.6
+    ref.current.rotation.z = t * 0.2
   })
 
-  const shape = useMemo(() => {
-    const geo = new THREE[geometry](...args)
-    return geo
-  }, [geometry, args])
+  const geo = useMemo(() => new THREE[geometry](...args), [geometry, args])
 
   return (
-    <mesh ref={ref} position={position} geometry={shape}>
+    <mesh ref={ref} position={position} geometry={geo}>
       <MeshTransmissionMaterial
-        transmission={0.9}
-        thickness={0.5}
-        roughness={0.1}
-        metalness={0.05}
-        ior={1.5}
-        chromaticAberration={0.6}
+        transmission={0.95}
+        thickness={0.8}
+        roughness={0.05}
+        metalness={0.02}
+        ior={1.6}
+        chromaticAberration={0.4}
         backside
         color={color}
-        clearcoat={0.3}
+        clearcoat={0.2}
       />
     </mesh>
   )
@@ -42,11 +40,12 @@ function GlassShape({ position, geometry, color, speed, args }) {
 
 export default function FloatingGlass() {
   const shapes = useMemo(() => [
-    { position: [-6, 2, -8], geometry: 'TorusKnotGeometry', color: '#8B5CF6', speed: 0.4, args: [0.6, 0.2, 64, 16] },
-    { position: [7, -1, -6], geometry: 'IcosahedronGeometry', color: '#06B6D4', speed: 0.3, args: [0.7, 0] },
-    { position: [-5, -3, -10], geometry: 'OctahedronGeometry', color: '#EC4899', speed: 0.5, args: [0.6, 0] },
-    { position: [5, 3, -9], geometry: 'TorusGeometry', color: '#F59E0B', speed: 0.35, args: [0.5, 0.2, 32, 64] },
-    { position: [0, -2.5, -12], geometry: 'DodecahedronGeometry', color: '#7C3AED', speed: 0.25, args: [0.8, 0] },
+    { geometry: 'TorusKnotGeometry', color: '#FF6B35', speed: 0.3, args: [0.7, 0.25, 128, 32], orbitRadius: 0, orbitSpeed: 0, phase: 0, position: [0, 0.5, -5] },
+    { geometry: 'IcosahedronGeometry', color: '#06D6A0', speed: 0.4, args: [0.5, 0], orbitRadius: 2.5, orbitSpeed: 0.3, phase: 0, position: [2.5, -0.5, -7] },
+    { geometry: 'OctahedronGeometry', color: '#FFD166', speed: 0.5, args: [0.45, 0], orbitRadius: 2.8, orbitSpeed: -0.25, phase: 1.5, position: [-2.8, 1, -8] },
+    { geometry: 'TorusGeometry', color: '#FF2D55', speed: 0.35, args: [0.55, 0.22, 48, 64], orbitRadius: 3.2, orbitSpeed: 0.2, phase: 3, position: [3.2, -1.5, -9] },
+    { geometry: 'DodecahedronGeometry', color: '#06D6A0', speed: 0.25, args: [0.6, 0], orbitRadius: 2, orbitSpeed: -0.35, phase: 2, position: [-2, 2, -10] },
+    { geometry: 'ConeGeometry', color: '#FF6B35', speed: 0.45, args: [0.4, 0.8, 32], orbitRadius: 3.5, orbitSpeed: 0.15, phase: 4, position: [3.5, 0, -6] },
   ], [])
 
   return (

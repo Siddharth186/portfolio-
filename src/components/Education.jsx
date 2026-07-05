@@ -1,102 +1,79 @@
 import { motion } from 'framer-motion'
 
-const education = [
+const items = [
   {
-    degree: 'B.E. in Computer Science and Engineering',
+    degree: 'B.E. Computer Science & Engineering',
     school: 'Dr. NGP Institute of Technology',
-    location: 'Coimbatore, India',
+    location: 'Coimbatore',
     period: '2024 – 2028',
     cgpa: '7.68 CGPA',
-    details: ['Specializing in AI/ML', 'Active in tech communities', 'Project-based learning focus'],
+    tags: ['AI/ML Focus', 'Project-Based Learning'],
   },
 ]
+
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-60px' },
+  transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+}
 
 export default function Education() {
   return (
     <section id="education">
       <div className="section-inner">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
+        <motion.div {...fadeUp}>
           <div className="section-label">Education</div>
-          <h2 className="section-title">Academic Background</h2>
+          <h2 className="section-title">
+            Academic <span className="hl">Background</span>
+          </h2>
         </motion.div>
 
-        <div style={{ position: 'relative', marginTop: '48px' }}>
-          <div style={{
-            position: 'absolute',
-            left: '24px',
-            top: 0,
-            bottom: 0,
-            width: '2px',
-            background: 'linear-gradient(to bottom, var(--primary), var(--secondary), transparent)',
-          }} />
-
-          {education.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -40 }}
+        <div style={{ marginTop: '28px' }}>
+          {items.map((item, i) => (
+            <motion.div key={i}
+              initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 position: 'relative',
-                paddingLeft: '64px',
-                marginBottom: '32px',
+                paddingLeft: '36px',
+                borderLeft: '2px solid var(--border)',
+                marginLeft: '6px',
               }}
             >
               <div style={{
-                position: 'absolute',
-                left: '16px',
-                top: '24px',
-                width: '16px',
-                height: '16px',
-                borderRadius: '50%',
-                background: 'var(--gradient-1)',
-                border: '3px solid var(--bg-primary)',
-                boxShadow: '0 0 20px rgba(139, 92, 246, 0.4)',
+                position: 'absolute', left: '-8px', top: '4px',
+                width: '14px', height: '14px', borderRadius: '50%',
+                background: 'var(--primary)',
+                border: '3px solid var(--bg)',
               }} />
 
-              <div className="glass" style={{ padding: '32px' }}>
+              <div className="card" style={{ padding: '28px' }}>
                 <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  flexWrap: 'wrap',
-                  gap: '12px',
-                  marginBottom: '16px',
+                  display: 'flex', justifyContent: 'space-between',
+                  alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px',
+                  marginBottom: '10px',
                 }}>
                   <div>
-                    <h3 style={{
-                      fontSize: '1.25rem',
-                      fontWeight: 700,
-                      color: 'var(--text-primary)',
-                      marginBottom: '4px',
-                    }}>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)' }}>
                       {item.degree}
                     </h3>
-                    <p style={{ color: 'var(--secondary)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginTop: '2px' }}>
                       {item.school} — {item.location}
                     </p>
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <span className="tag">{item.period}</span>
-                    <div style={{
-                      marginTop: '8px',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.85rem',
-                      color: 'var(--gold)',
-                    }}>
+                    <div style={{ marginTop: '4px', fontSize: '0.85rem', color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>
                       {item.cgpa}
                     </div>
                   </div>
                 </div>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                  {item.details.map((d, i) => (
-                    <span key={i} className="tag">{d}</span>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                  {item.tags.map((t, j) => (
+                    <span key={j} className="tag">{t}</span>
                   ))}
                 </div>
               </div>

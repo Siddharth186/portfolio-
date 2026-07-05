@@ -1,50 +1,50 @@
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
 export default function SynthwaveGrid() {
-  const gridRef = useMemo(() => {
-    const size = 30
-    const divisions = 40
-    const geometry = new THREE.BufferGeometry()
-    const vertices = []
-    const colors = []
-    const step = size / divisions
+  const ref = useRef()
+
+  const grid = useMemo(() => {
+    const size = 40
+    const divs = 50
+    const geo = new THREE.BufferGeometry()
+    const verts = []
+    const step = size / divs
     const half = size / 2
-
-    const color1 = new THREE.Color('#8B5CF6')
-    const color2 = new THREE.Color('#EC4899')
-
-    for (let i = 0; i <= divisions; i++) {
+    const c1 = new THREE.Color('#FF6B35')
+    const c2 = new THREE.Color('#06D6A0')
+    for (let i = 0; i <= divs; i++) {
       const x = -half + i * step
-      vertices.push(x, 0, -half, x, 0, half)
-      const t = i / divisions
-      const c = color1.clone().lerp(color2, t)
-      colors.push(c.r, c.g, c.b, c.r, c.g, c.b)
+      verts.push(x, 0, -half, x, 0, half)
     }
-
-    for (let i = 0; i <= divisions; i++) {
+    for (let i = 0; i <= divs; i++) {
       const z = -half + i * step
-      vertices.push(-half, 0, z, half, 0, z)
-      const t = i / divisions
-      const c = color1.clone().lerp(color2, t)
-      colors.push(c.r, c.g, c.b, c.r, c.g, c.b)
+      verts.push(-half, 0, z, half, 0, z)
     }
-
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3))
-    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3))
-    return geometry
+    const pos = new Float32Array(verts)
+    const colors = new Float32Array(verts.length)
+    for (let i = 0; i < verts.length / 3; i++) {
+      const t = (i / (verts.length / 3))
+      const c = c1.clone().lerp(c2, t)
+      colors[i * 3] = c.r
+      colors[i * 3 + 1] = c.g
+      colors[i * 3 + 2] = c.b
+    }
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3))
+    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
+    return geo
   }, [])
 
   useFrame((state) => {
-    if (gridRef.current) {
-      gridRef.current.position.z = ((state.clock.elapsedTime * 0.3) % 1.5) - 0.75
+    if (ref.current) {
+      ref.current.position.z = ((state.clock.elapsedTime * 0.2) % 2) - 1
     }
   })
 
   return (
-    <lineSegments ref={gridRef} geometry={gridRef.current?.geometry || gridRef}>
-      <lineBasicMaterial vertexColors transparent opacity={0.15} />
+    <lineSegments ref={ref} geometry={grid}>
+      <lineBasicMaterial vertexColors transparent opacity={0.08} />
     </lineSegments>
   )
 }
