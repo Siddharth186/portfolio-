@@ -70,7 +70,7 @@ export default function Skills() {
           }}
         >
           <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
-            {'>'} LeetCode: <span style={{ color: 'var(--primary)', fontWeight: 600 }}>35+ problems</span> (Easy / Medium)
+            {'>'} LeetCode: <span style={{ color: 'var(--primary)', fontWeight: 600 }}>100+ problems</span> (Easy / Medium)
           </span>
         </motion.div>
       </div>

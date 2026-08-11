@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { stagger, fadeUp, fadeUpLight, fadeLeft, fadeRight, lineGrow } from '../animations'
 
 const stats = [
-  { label: 'LeetCode Problems', value: '85+' },
+  { label: 'LeetCode Problems', value: '100+' },
   { label: 'Projects Built', value: '3+' },
   { label: 'Languages', value: '4' },
   { label: 'Internships', value: '1' },
@@ -105,7 +105,7 @@ export default function About() {
                   { label: 'Name', value: 'Siddharth S' },
                   { label: 'Location', value: 'Tiruppur, Tamil Nadu' },
                   { label: 'Degree', value: 'B.E. Computer Science & Engineering' },
-                  { label: 'CGPA', value: '7.68 / 10.0' },
+                  { label: 'CGPA', value: '7.82 / 10.0' },
                   { label: 'Available', value: 'Open for Internships', dot: true },
                 ].map((item, i) => (
                   <motion.div

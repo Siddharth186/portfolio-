@@ -14,7 +14,7 @@ const testimonials = [
     highlight: 'Technical Excellence',
   },
   {
-    quote: '85+ LeetCode problems solved across Easy and Medium difficulties. Strong foundation in data structures, algorithms, and object-oriented programming principles.',
+    quote: '100+ LeetCode problems solved across Easy and Medium difficulties. Strong foundation in data structures, algorithms, and object-oriented programming principles.',
     author: 'Problem Solving',
     role: 'DSA Practice',
     highlight: 'Analytical Skills',

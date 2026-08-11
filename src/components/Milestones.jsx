@@ -17,7 +17,7 @@ const milestones = [
     color: '#6D28D9',
   },
   {
-    quote: '85+ LeetCode problems solved across Easy and Medium difficulty levels. Strong foundation in data structures, algorithms, and object-oriented programming with clean, efficient code.',
+    quote: '100+ LeetCode problems solved across Easy and Medium difficulty levels. Strong foundation in data structures, algorithms, and object-oriented programming with clean, efficient code.',
     author: 'Problem Solving',
     role: 'DSA Practice Journey',
     icon: '○',

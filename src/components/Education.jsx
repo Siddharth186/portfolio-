@@ -6,7 +6,7 @@ const items = [
     school: 'Dr. NGP Institute of Technology',
     location: 'Coimbatore',
     period: '2024 – 2028',
-    cgpa: '7.68 CGPA',
+    cgpa: '7.82 CGPA',
     tags: ['AI/ML Focus', 'Project-Based Learning'],
   },
 ]

@@ -5,7 +5,7 @@ const events = [
     period: '2024 – 2028',
     title: 'B.E. Computer Science & Engineering',
     org: 'Dr. NGP Institute of Technology, Coimbatore',
-    meta: '7.68 CGPA',
+    meta: '7.82 CGPA',
     tags: ['AI/ML Focus', 'Project-Based'],
     type: 'education',
   },

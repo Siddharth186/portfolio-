@@ -19,7 +19,7 @@ const services = [
   {
     icon: '○',
     title: 'Problem Solving & DSA',
-    desc: 'Strong foundation in data structures, algorithms, and object-oriented programming. 85+ LeetCode problems solved with a focus on clean, efficient, and scalable solutions.',
+    desc: 'Strong foundation in data structures, algorithms, and object-oriented programming. 100+ LeetCode problems solved with a focus on clean, efficient, and scalable solutions.',
     tags: ['Java', 'Python', 'DSA'],
     color: '#A78BFA',
   },
